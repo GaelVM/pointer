@@ -3,7 +3,7 @@
     "id": 1,
     "nombre": "AGROSOLTEC S.R.LTDA - ANEXO 01",
     "cc": "CC-0001",
-    "direccion": "JR. REVILLA PEREZ NRO. 153 CAJAMARCA",
+    "direccion": "JR. REVILLA PEREZ NRO. 153 - CAJAMARCA",
     "lat": -7.153026,
     "lng": -78.5173973,
     "estado": "sin_visitar",
@@ -13,7 +13,7 @@
     "id": 2,
     "nombre": "AGROSOLTEC S.R.LTDA",
     "cc": "CC-0002",
-    "direccion": "JR. LOS GLADIOLOS NRO. 150",
+    "direccion": "JR. LOS GLADIOLOS NRO. 150 - CAJAMARCA",
     "lat": -7.1545465,
     "lng": -78.5180949,
     "estado": "sin_visitar",
@@ -21,32 +21,23 @@
   },
   {
     "id": 3,
-    "nombre": "Cliente El Porvenir",
+    "nombre": "AGROVETERINARIA LA SOLUCION E.I.R.L.",
     "cc": "CC-0003",
-    "direccion": "El Porvenir, Trujillo, La Libertad",
-    "lat": -8.0839,
-    "lng": -78.9986,
+    "direccion": "JR. STA.TERESA DE JOURNET NRO. 428 - CAJAMARCA",
+    "lat": -7.1470511,
+    "lng": -78.5113709,
     "estado": "sin_visitar",
-    "texto": "Revisar dirección antes de salir."
+    "texto": "Pendiente de primera visita. BAJA DE OFICIO "
   },
   {
     "id": 4,
-    "nombre": "Cliente Chepén",
+    "nombre": "AGROVETERINARIA LA SOLUCION E.I.R.L.",
     "cc": "CC-0004",
-    "direccion": "Chepén, La Libertad",
-    "lat": -7.2244,
-    "lng": -79.4244,
+    "direccion": "JR. REVILLA PEREZ NRO. 148 - CAJAMARCA",
+    "lat": -7.1531902,
+    "lng": -78.5331195,
     "estado": "sin_visitar",
-    "texto": "Zona norte del departamento."
+    "texto": "Pendiente de primera visita. BAJA DE OFICIO "
   },
-  {
-    "id": 5,
-    "nombre": "Cliente Pacasmayo",
-    "cc": "CC-0005",
-    "direccion": "Pacasmayo, La Libertad",
-    "lat": -7.4019,
-    "lng": -79.5717,
-    "estado": "visitada",
-    "texto": "Visita completada. Registrar próxima fecha."
-  }
+
 ]
