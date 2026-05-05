@@ -21,13 +21,18 @@ const els = {
   reset: document.getElementById("resetBtn"),
   message: document.getElementById("message"),
   stats: document.getElementById("stats"),
-  list: document.getElementById("list")
+  list: document.getElementById("list"),
+  togglePanel: document.getElementById("togglePanelBtn"),
+  panelContent: document.getElementById("panelContent")
 };
 
 init();
 
 function init() {
-  map = L.map("map");
+  map = L.map("map", {
+    zoomControl: true
+  });
+
   map.fitBounds(JURISDICTION_BOUNDS);
 
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -44,6 +49,13 @@ function init() {
   safeOn(els.nearest, "click", goToNearestPoint);
   safeOn(els.fit, "click", fitToResults);
   safeOn(els.reset, "click", () => map.fitBounds(JURISDICTION_BOUNDS));
+  safeOn(els.togglePanel, "click", togglePanel);
+
+  window.addEventListener("resize", () => {
+    setTimeout(() => map.invalidateSize(), 250);
+  });
+
+  setTimeout(() => map.invalidateSize(), 300);
 
   loadData();
 }
@@ -54,6 +66,7 @@ async function loadData() {
     if (!response.ok) throw new Error("No se pudo cargar data.json");
     allPoints = await response.json();
     render();
+    fitToResults();
   } catch (error) {
     showMessage("Error leyendo data.json. Publica en GitHub Pages o usa un servidor local.");
     console.error(error);
@@ -99,6 +112,7 @@ function render() {
 
   updateStats();
   showMessage(`${currentFiltered.length} punto(s) visible(s). El mapa ubica por latitud y longitud.`);
+  setTimeout(() => map.invalidateSize(), 100);
 }
 
 function updateStats() {
@@ -178,12 +192,19 @@ function cardEl(point) {
 
   card.querySelector('[data-action="zoom"]').addEventListener("click", event => {
     event.preventDefault();
+
     if (!validCoords(point)) {
       showMessage("Este punto no tiene coordenadas válidas.");
       return;
     }
 
+    if (window.innerWidth <= 850 && els.panelContent) {
+      els.panelContent.classList.add("collapsed");
+    }
+
     map.setView([point.lat, point.lng], 18);
+    setTimeout(() => map.invalidateSize(), 150);
+
     const marker = markerById.get(String(point.id));
     if (marker) marker.openPopup();
   });
@@ -219,7 +240,13 @@ function detectUserLocation() {
         ${userLocation.lat}, ${userLocation.lng}
       `).openPopup();
 
+      if (window.innerWidth <= 850 && els.panelContent) {
+        els.panelContent.classList.add("collapsed");
+      }
+
       map.setView([userLocation.lat, userLocation.lng], 16);
+      setTimeout(() => map.invalidateSize(), 150);
+
       showMessage(`Ubicación detectada. Precisión aproximada: ${userLocation.accuracy} metros.`);
       render();
     },
@@ -237,7 +264,7 @@ function detectUserLocation() {
 
 function goToNearestPoint() {
   if (!userLocation) {
-    showMessage("Primero presiona 'Detectar mi ubicación'.");
+    showMessage("Primero presiona Detectar mi ubicación.");
     return;
   }
 
@@ -258,7 +285,13 @@ function goToNearestPoint() {
     }
   });
 
+  if (window.innerWidth <= 850 && els.panelContent) {
+    els.panelContent.classList.add("collapsed");
+  }
+
   map.setView([nearest.lat, nearest.lng], 18);
+  setTimeout(() => map.invalidateSize(), 150);
+
   const marker = markerById.get(String(nearest.id));
   if (marker) marker.openPopup();
 
@@ -273,7 +306,14 @@ function fitToResults() {
   }
 
   const bounds = L.latLngBounds(valid.map(p => [p.lat, p.lng]));
-  map.fitBounds(bounds, { padding: [40, 40] });
+  map.fitBounds(bounds, { padding: [35, 35] });
+  setTimeout(() => map.invalidateSize(), 100);
+}
+
+function togglePanel() {
+  if (!els.panelContent) return;
+  els.panelContent.classList.toggle("collapsed");
+  setTimeout(() => map.invalidateSize(), 250);
 }
 
 function routeUrl(point) {
@@ -341,3 +381,4 @@ function escapeHtml(value) {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 }
+
