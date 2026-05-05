@@ -82,3 +82,27 @@ Usa:
 - Registros: 464
 - Con coordenadas: 385
 - Sin coordenadas: 79
+
+
+## Capa de jurisdicción
+
+Esta versión incluye una capa marcada de jurisdicción:
+
+- Departamento completo de La Libertad.
+- Provincias de Cajamarca incluidas en la jurisdicción:
+  - San Miguel
+  - Contumazá
+  - San Pablo
+  - Celendín
+  - Cajabamba
+  - San Marcos
+  - Cajamarca
+
+Cada tarjeta indica si el punto está dentro o fuera de la jurisdicción, siempre que tenga `lat` y `lng`.
+
+Botones agregados:
+
+- `Mostrar / ocultar jurisdicción`
+- `Ver jurisdicción completa`
+
+La validación usa Turf.js en el navegador.

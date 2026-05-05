@@ -285,3 +285,12 @@ button:hover {
   }
 }
 
+
+
+.badge.jurisdiction.inside {
+  background: #0f766e;
+}
+
+.badge.jurisdiction.outside {
+  background: #991b1b;
+}
