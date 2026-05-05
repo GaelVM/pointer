@@ -44,8 +44,8 @@
     "departamento": "Cajamarca",
     "direccion": "CAJAMARCA - CAJAMARCA - CAJAMARCA",
     "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
+    "lat": -7.1480709,
+    "lng": -78.5227964,
     "texto": "Pendiente de visita"
   },
   {
@@ -55,8 +55,8 @@
     "departamento": "Cajamarca",
     "direccion": "CAJAMARCA - CAJAMARCA - CAJAMARCA",
     "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
+    "lat": -7.1435766,
+    "lng": -78.5104426,
     "texto": "Pendiente de visita"
   },
  
@@ -255,17 +255,7 @@
     "lng": -78.658617,
     "texto": "Pendiente de visita"
   },
-  {
-    "id": 79,
-    "nombre": "AGROSERVICIOS \"EL ARROZAL\" S.R.L",
-    "cc": " 20480483821",
-    "departamento": "Cajamarca",
-    "direccion": "JAEN - JAEN - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
+  
   {
     "id": 80,
     "nombre": "\"AGROPECUARIA JEMÉNEZ SAC\"",
@@ -322,18 +312,6 @@
     "estado": "sin_visitar",
     "lat": -7.221061,
     "lng": -78.839564,
-    "texto": "Pendiente de visita"
-  },
- 
-  {
-    "id": 90,
-    "nombre": "NEGOCIOS Y SERVICIOS AGRICOLAS \"FENOR\" S.A.C",
-    "cc": " 20480032731",
-    "departamento": "Cajamarca",
-    "direccion": "BELLAVISTA - JAEN - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": -5.715232,
-    "lng": -78.80569,
     "texto": "Pendiente de visita"
   },
   
