@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "nombre": "Cliente Centro Trujillo",
+    "cc": "CC-0001",
+    "direccion": "Centro Histórico de Trujillo, La Libertad",
+    "lat": -8.1116,
+    "lng": -79.0287,
+    "estado": "sin_visitar",
+    "texto": "Pendiente de primera visita. Coordinar horario por la mañana."
+  },
+  {
+    "id": 2,
+    "nombre": "Cliente Huanchaco",
+    "cc": "CC-0002",
+    "direccion": "Huanchaco, Trujillo, La Libertad",
+    "lat": -8.0814,
+    "lng": -79.1208,
+    "estado": "visitada",
+    "texto": "Visita realizada. Cliente interesado en seguimiento."
+  },
+  {
+    "id": 3,
+    "nombre": "Cliente El Porvenir",
+    "cc": "CC-0003",
+    "direccion": "El Porvenir, Trujillo, La Libertad",
+    "lat": -8.0839,
+    "lng": -78.9986,
+    "estado": "sin_visitar",
+    "texto": "Revisar dirección antes de salir."
+  },
+  {
+    "id": 4,
+    "nombre": "Cliente Chepén",
+    "cc": "CC-0004",
+    "direccion": "Chepén, La Libertad",
+    "lat": -7.2244,
+    "lng": -79.4244,
+    "estado": "sin_visitar",
+    "texto": "Zona norte del departamento."
+  },
+  {
+    "id": 5,
+    "nombre": "Cliente Pacasmayo",
+    "cc": "CC-0005",
+    "direccion": "Pacasmayo, La Libertad",
+    "lat": -7.4019,
+    "lng": -79.5717,
+    "estado": "visitada",
+    "texto": "Visita completada. Registrar próxima fecha."
+  }
+]
