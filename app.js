@@ -68,7 +68,7 @@ async function loadData() {
     render();
     fitToResults();
   } catch (error) {
-    showMessage("Error leyendo data.json. Publica en GitHub Pages o usa un servidor local.");
+    showMessage("Error leyendo data.json.");
     console.error(error);
   }
 }
@@ -152,7 +152,7 @@ function popupHtml(point) {
   return `
     <div class="popup">
       <h3>${escapeHtml(point.nombre)}</h3>
-      <p><strong>CC:</strong> ${escapeHtml(point.cc)}</p>
+      <p><strong>RUC:</strong> ${escapeHtml(point.cc)}</p>
       <p><strong>Departamento:</strong> ${escapeHtml(point.departamento)}</p>
       <p><strong>Dirección:</strong> ${escapeHtml(point.direccion)}</p>
       <p><strong>Estado:</strong> ${statusLabel(point.estado)}</p>
