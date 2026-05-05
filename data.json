@@ -142,5 +142,16 @@
     "lng":-78.5147,
     "estado": "sin_visitar",
     "texto": "Pendiente de primera visita. "
+  },
+ {
+    "id": 14,
+    "nombre": "AGROVET LOS ANGELES JR & W GANADEROS S.R.L..",
+    "cc": "CC-0014",
+    "departamento": "Cajamarca",
+    "direccion": "JR. CHANCHAMAYO NRO. 1200 - CAJAMARCA",
+    "lat":-7.1491,
+    "lng":-78.5235,
+    "estado": "sin_visitar",
+    "texto": "Pendiente de primera visita. "
   }
 ]
