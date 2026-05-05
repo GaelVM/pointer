@@ -1,13 +1,13 @@
 [
   {
     "id": 1,
-    "nombre": "Cliente Centro Trujillo",
+    "nombre": "AGROSOLTEC S.R.LTDA",
     "cc": "CC-0001",
-    "direccion": "Centro Histórico de Trujillo, La Libertad",
-    "lat": -8.1116,
-    "lng": -79.0287,
+    "direccion": "JR. REVILLA PEREZ NRO. 153 CAJAMARCA",
+    "lat": -7.153026,
+    "lng": -78.5173973,
     "estado": "sin_visitar",
-    "texto": "Pendiente de primera visita. Coordinar horario por la mañana."
+    "texto": "Pendiente de primera visita."
   },
   {
     "id": 2,
