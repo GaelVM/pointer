@@ -1,5 +1,15 @@
 [
- 
+   {
+    "id": 1,
+    "nombre": "JUEGO CASINO",
+    "cc": " S/D",
+    "departamento": "La Libertad",
+    "direccion": "PAIJAN",
+    "estado": "sin_visitar",
+    "lat":-7.734768, 
+    "lng":-79.303161,
+    "texto": "Pendiente de visita"
+  },
   {
     "id": 2,
     "nombre": "AGROSOLTEC S.R.L.",
