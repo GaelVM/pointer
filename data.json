@@ -109,5 +109,38 @@
     "lng":-78.5332,
     "estado": "sin_visitar",
     "texto": "Pendiente de primera visita. "
+  },
+  {
+    "id": 11,
+    "nombre": "LC PHARMACIA VETERINARIA EMPRESA INDIVIDUAL DE RESPONSABILIDAD LIMITADA",
+    "cc": "CC-0011",
+    "departamento": "Cajamarca",
+    "direccion": "MZA. E LOTE. 16 LOT. LAS TORRECITAS (JR LAS GAVIOTAS 191) - CAJAMARCA",
+    "lat":-7.14957,
+    "lng":-78.5180,
+    "estado": "sin_visitar",
+    "texto": "Pendiente de primera visita. "
+  },
+ {
+    "id": 12,
+    "nombre": "AGROSOLTEC S.R.LTDA.",
+    "cc": "CC-0012",
+    "departamento": "Cajamarca",
+    "direccion": "JR. LOS GLADIOLOS NRO. 150 - CAJAMARCA",
+    "lat":-7.14957,
+    "lng":-78.5180,
+    "estado": "sin_visitar",
+    "texto": "Pendiente de primera visita. "
+  },
+ {
+    "id": 13,
+    "nombre": "AGROPECUARIA JIMENEZ S.A.C.",
+    "cc": "CC-0013",
+    "departamento": "Cajamarca",
+    "direccion": "PJ. LA COLMENA NRO. 164 - CAJAMARCA",
+    "lat":-7.1576,
+    "lng":-78.5147,
+    "estado": "sin_visitar",
+    "texto": "Pendiente de primera visita. "
   }
 ]
