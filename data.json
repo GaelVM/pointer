@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "nombre": "AGROSOLTEC S.R.LTDA",
+    "nombre": "AGROSOLTEC S.R.LTDA - ANEXO 01",
     "cc": "CC-0001",
     "direccion": "JR. REVILLA PEREZ NRO. 153 CAJAMARCA",
     "lat": -7.153026,
@@ -11,13 +11,13 @@
   },
   {
     "id": 2,
-    "nombre": "Cliente Huanchaco",
+    "nombre": "AGROSOLTEC S.R.LTDA",
     "cc": "CC-0002",
-    "direccion": "Huanchaco, Trujillo, La Libertad",
-    "lat": -8.0814,
-    "lng": -79.1208,
-    "estado": "visitada",
-    "texto": "Visita realizada. Cliente interesado en seguimiento."
+    "direccion": "JR. LOS GLADIOLOS NRO. 150",
+    "lat": -7.1545465,
+    "lng": -78.5180949,
+    "estado": "sin_visitar",
+    "texto": "Pendiente de primera visita."
   },
   {
     "id": 3,
