@@ -87,5 +87,27 @@
     "lng":-78.5330,
     "estado": "sin_visitar",
     "texto": "Pendiente de primera visita. "
+  },
+  {
+    "id": 9,
+    "nombre": "SERVICIOS VETERINARIOS SEVAVET SRL",
+    "cc": "CC-0009",
+    "departamento": "Cajamarca",
+    "direccion": "JR. REVILLA PEREZ NRO. 156 - CAJAMARCA",
+    "lat":-7.15314,
+    "lng":-78.5330,
+    "estado": "sin_visitar",
+    "texto": "Pendiente de primera visita. "
+  },
+  {
+    "id": 10,
+    "nombre": "AGROVETERINARIA NIñO DE PUMARUME EIRL",
+    "cc": "CC-0010",
+    "departamento": "Cajamarca",
+    "direccion": "JR. REVILLA PEREZ NRO. 171 - CAJAMARCA",
+    "lat":-7.15296,
+    "lng":-78.5332,
+    "estado": "sin_visitar",
+    "texto": "Pendiente de primera visita. "
   }
 ]
