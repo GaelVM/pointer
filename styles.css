@@ -1,0 +1,263 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f7fb;
+  color: #1f2937;
+}
+
+.topbar {
+  min-height: 88px;
+  padding: 16px 24px;
+  background: #111827;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.topbar h1 {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+
+.topbar p {
+  margin: 0;
+  color: #cbd5e1;
+}
+
+.stats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.stats span {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 8px 10px;
+  border-radius: 999px;
+  font-size: 14px;
+}
+
+.layout {
+  height: calc(100vh - 88px);
+  display: grid;
+  grid-template-columns: 360px 1fr;
+}
+
+.panel {
+  padding: 18px;
+  overflow: auto;
+  background: white;
+  border-right: 1px solid #e5e7eb;
+}
+
+.panel h2,
+.panel h3 {
+  margin-top: 0;
+}
+
+label {
+  display: block;
+  margin: 14px 0 6px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+input,
+select,
+button {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+}
+
+button {
+  margin-top: 14px;
+  border: 0;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+}
+
+.legend {
+  margin: 18px 0;
+  padding: 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #f9fafb;
+}
+
+.dot {
+  width: 13px;
+  height: 13px;
+  display: inline-block;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.pending {
+  background: #f97316;
+}
+
+.visited {
+  background: #22c55e;
+}
+
+.list {
+  display: grid;
+  gap: 10px;
+}
+
+.card {
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+}
+
+.card:hover {
+  border-color: #2563eb;
+}
+
+.card strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.card small {
+  display: block;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.badge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: white;
+}
+
+.badge.sin_visitar {
+  background: #f97316;
+}
+
+.badge.visitada {
+  background: #22c55e;
+}
+
+.popup-title {
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.popup-row {
+  margin: 3px 0;
+}
+
+@media (max-width: 820px) {
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .layout {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .panel {
+    border-right: 0;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .map {
+    height: 68vh;
+  }
+}
+
+button.secondary {
+  background: #0f766e;
+}
+
+button.secondary:hover {
+  background: #0d9488;
+}
+
+.hint {
+  margin: 8px 0 0;
+  color: #6b7280;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.current {
+  background: #2563eb;
+}
+
+.user-location-dot {
+  width: 26px;
+  height: 26px;
+  background: #2563eb;
+  border: 4px solid white;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0,0,0,.35);
+  position: relative;
+}
+
+.user-location-dot::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border: 2px solid rgba(37, 99, 235, .35);
+  border-radius: 50%;
+}
+
+.accuracy-circle {
+  stroke: #2563eb;
+  stroke-width: 1;
+  fill: #2563eb;
+  fill-opacity: .12;
+}
+
+.route-link,
+.mini-route {
+  display: inline-block;
+  margin-top: 8px;
+  color: #2563eb;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.route-link:hover,
+.mini-route:hover {
+  text-decoration: underline;
+}
+
+.mini-route {
+  display: block;
+  font-size: 13px;
+}
