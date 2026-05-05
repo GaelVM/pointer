@@ -1,284 +1,246 @@
-const LA_LIBERTAD_CENTER = [-8.11599, -79.02998]; // Trujillo, La Libertad
-const LA_LIBERTAD_BOUNDS = [
-  [-8.90, -79.70],
-  [-6.95, -77.45]
+const JURISDICTION_BOUNDS = [
+  [-8.45, -79.85], // suroeste aproximado La Libertad
+  [-6.30, -77.50]  // noreste aproximado Cajamarca
 ];
 
-const map = L.map("map", {
-  maxBounds: LA_LIBERTAD_BOUNDS,
-  maxBoundsViscosity: 0.8
-}).setView(LA_LIBERTAD_CENTER, 9);
-
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 19,
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-const markerLayer = L.layerGroup().addTo(map);
-const locationLayer = L.layerGroup().addTo(map);
-let puntos = [];
-let visibleMarkers = [];
+let map;
+let allPoints = [];
+let markersLayer;
 let userMarker = null;
-let userAccuracyCircle = null;
-let watchId = null;
 
+const listEl = document.getElementById("list");
+const messageEl = document.getElementById("message");
 const searchInput = document.getElementById("searchInput");
+const departmentFilter = document.getElementById("departmentFilter");
 const statusFilter = document.getElementById("statusFilter");
-const fitBtn = document.getElementById("fitBtn");
 const locateBtn = document.getElementById("locateBtn");
-const locationStatus = document.getElementById("locationStatus");
-const list = document.getElementById("list");
+const resetBtn = document.getElementById("resetBtn");
 
-const totalCount = document.getElementById("totalCount");
-const visitedCount = document.getElementById("visitedCount");
-const pendingCount = document.getElementById("pendingCount");
+init();
 
-function markerIcon(estado) {
-  const color = estado === "visitada" ? "#22c55e" : "#f97316";
+async function init() {
+  map = L.map("map");
+  map.fitBounds(JURISDICTION_BOUNDS);
 
-  return L.divIcon({
-    className: "custom-marker",
-    html: `<div style="
-      width: 22px;
-      height: 22px;
-      background: ${color};
-      border: 3px solid white;
-      border-radius: 50%;
-      box-shadow: 0 2px 8px rgba(0,0,0,.35);
-    "></div>`,
-    iconSize: [22, 22],
-    iconAnchor: [11, 11]
-  });
-}
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: "&copy; OpenStreetMap contributors"
+  }).addTo(map);
 
-function userLocationIcon() {
-  return L.divIcon({
-    className: "custom-marker user-location-marker",
-    html: `<div class="user-location-dot"></div>`,
-    iconSize: [26, 26],
-    iconAnchor: [13, 13]
-  });
-}
+  markersLayer = L.layerGroup().addTo(map);
 
-function estadoTexto(estado) {
-  return estado === "visitada" ? "Visitada" : "Sin visitar";
-}
-
-function googleMapsUrl(p) {
-  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(p.lat + "," + p.lng)}`;
-}
-
-function googleMapsSearchUrl(p) {
-  const query = p.direccion ? `${p.direccion}, La Libertad, Perú` : `${p.lat},${p.lng}`;
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
-}
-
-function hasValidCoordinates(p) {
-  return Number.isFinite(Number(p.lat)) && Number.isFinite(Number(p.lng));
-}
-
-function popupContent(p) {
-  return `
-    <div class="popup-title">${p.nombre}</div>
-    <div class="popup-row"><b>CC:</b> ${p.cc || "-"}</div>
-    <div class="popup-row"><b>Dirección:</b> ${p.direccion || "-"}</div>
-    <div class="popup-row"><b>Estado:</b> ${estadoTexto(p.estado)}</div>
-    <div class="popup-row"><b>Texto:</b> ${p.texto || "-"}</div>
-    <div class="coords"><b>Coordenadas:</b> ${p.lat}, ${p.lng}</div>
-    <a class="route-link" href="${googleMapsUrl(p)}" target="_blank" rel="noopener">Abrir ruta en Google Maps</a>
-    <a class="route-link secondary-link" href="${googleMapsSearchUrl(p)}" target="_blank" rel="noopener">Ver punto en Google Maps</a>
-  `;
-}
-
-function normalize(text) {
-  return String(text || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-}
-
-function matchesSearch(p, query) {
-  if (!query) return true;
-
-  const content = normalize([
-    p.nombre,
-    p.cc,
-    p.direccion,
-    p.texto,
-    p.estado
-  ].join(" "));
-
-  return content.includes(normalize(query));
-}
-
-function filteredPoints() {
-  const query = searchInput.value.trim();
-  const status = statusFilter.value;
-
-  return puntos.filter(p => {
-    const statusOk = status === "todos" || p.estado === status;
-    return statusOk && matchesSearch(p, query);
-  });
-}
-
-function renderStats(data) {
-  const visitadas = data.filter(p => p.estado === "visitada").length;
-  const sinVisitar = data.filter(p => p.estado !== "visitada").length;
-
-  totalCount.textContent = `${data.length} puntos`;
-  visitedCount.textContent = `${visitadas} visitadas`;
-  pendingCount.textContent = `${sinVisitar} sin visitar`;
-}
-
-function renderList(data) {
-  list.innerHTML = "";
-
-  if (!data.length) {
-    list.innerHTML = "<p>No hay resultados.</p>";
-    return;
+  try {
+    const response = await fetch("data.json", { cache: "no-store" });
+    allPoints = await response.json();
+    render();
+  } catch (error) {
+    showMessage("No se pudo leer data.json. Revisa que el archivo exista y que estés abriendo la web desde GitHub Pages o un servidor local.");
   }
 
-  data.forEach((p, index) => {
-    const item = document.createElement("div");
-    item.className = "card";
-    item.innerHTML = `
-      <strong>${p.nombre}</strong>
-      <small>${p.direccion || "Sin dirección"}</small>
-      <div>CC: ${p.cc || "-"}</div>
-      <span class="badge ${p.estado}">${estadoTexto(p.estado)}</span>
-      <div class="coords">${p.lat}, ${p.lng}</div>
-      <a class="mini-route" href="${googleMapsUrl(p)}" target="_blank" rel="noopener">Ruta en Google Maps</a>
-    `;
-
-    item.addEventListener("click", event => {
-      if (event.target.tagName.toLowerCase() === "a") return;
-      const marker = visibleMarkers[index];
-      if (marker) {
-        map.setView(marker.getLatLng(), 15);
-        marker.openPopup();
-      }
-    });
-
-    list.appendChild(item);
-  });
-}
-
-function renderMarkers(data) {
-  markerLayer.clearLayers();
-  visibleMarkers = [];
-
-  data.forEach(p => {
-    if (!hasValidCoordinates(p)) return;
-
-    const marker = L.marker([Number(p.lat), Number(p.lng)], {
-      icon: markerIcon(p.estado)
-    }).bindPopup(popupContent(p));
-
-    marker.addTo(markerLayer);
-    visibleMarkers.push(marker);
-  });
-}
-
-function fitToResults() {
-  if (!visibleMarkers.length) return;
-
-  const group = L.featureGroup(visibleMarkers);
-  map.fitBounds(group.getBounds().pad(0.2));
+  searchInput.addEventListener("input", render);
+  departmentFilter.addEventListener("change", render);
+  statusFilter.addEventListener("change", render);
+  locateBtn.addEventListener("click", locateUser);
+  resetBtn.addEventListener("click", () => map.fitBounds(JURISDICTION_BOUNDS));
 }
 
 function render() {
-  const data = filteredPoints();
-  renderStats(data);
-  renderMarkers(data);
-  renderList(data);
+  markersLayer.clearLayers();
+  listEl.innerHTML = "";
+
+  const query = normalize(searchInput.value);
+  const selectedDept = departmentFilter.value;
+  const selectedStatus = statusFilter.value;
+
+  const filtered = allPoints.filter((point) => {
+    const text = normalize([
+      point.nombre,
+      point.cc,
+      point.direccion,
+      point.departamento,
+      point.estado,
+      point.texto
+    ].join(" "));
+
+    const matchesSearch = !query || text.includes(query);
+    const matchesDept = selectedDept === "todos" || point.departamento === selectedDept;
+    const matchesStatus = selectedStatus === "todos" || point.estado === selectedStatus;
+
+    return matchesSearch && matchesDept && matchesStatus;
+  });
+
+  filtered.forEach((point) => {
+    if (isValidCoordinate(point.lat, point.lng)) {
+      const marker = L.marker([point.lat, point.lng], {
+        icon: createIcon(point.estado)
+      }).addTo(markersLayer);
+
+      marker.bindPopup(createPopup(point));
+    }
+
+    listEl.appendChild(createCard(point));
+  });
+
+  showMessage(`${filtered.length} punto(s) visible(s). Recuerda: la ubicación real depende del lat/lng, no de la CC.`);
 }
 
-function updateUserLocation(position, centerMap = false) {
-  const lat = position.coords.latitude;
-  const lng = position.coords.longitude;
-  const accuracy = Math.round(position.coords.accuracy || 0);
-  const latLng = [lat, lng];
-
-  if (!userMarker) {
-    userMarker = L.marker(latLng, { icon: userLocationIcon() })
-      .bindPopup("<b>Mi ubicación actual</b><br>Referencia GPS del navegador.")
-      .addTo(locationLayer);
-  } else {
-    userMarker.setLatLng(latLng);
-  }
-
-  if (!userAccuracyCircle) {
-    userAccuracyCircle = L.circle(latLng, {
-      radius: accuracy,
-      className: "accuracy-circle"
-    }).addTo(locationLayer);
-  } else {
-    userAccuracyCircle.setLatLng(latLng);
-    userAccuracyCircle.setRadius(accuracy);
-  }
-
-  locationStatus.textContent = `Ubicación detectada. Precisión aproximada: ${accuracy} m.`;
-
-  if (centerMap) {
-    map.setView(latLng, 15);
-    userMarker.openPopup();
-  }
+function createIcon(status) {
+  const className = status === "visitada" ? "marker-visitada" : "marker-sin_visitar";
+  return L.divIcon({
+    className: "",
+    html: `<span class="marker-dot ${className}"></span>`,
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
+    popupAnchor: [0, -12]
+  });
 }
 
-function handleLocationError(error) {
-  const messages = {
-    1: "Permiso de ubicación denegado. Actívalo en tu navegador. En Chrome: candado junto a la URL > Permisos > Ubicación > Permitir.",
-    2: "No se pudo determinar tu ubicación. Activa GPS/ubicación del equipo y prueba al aire libre o con datos móviles.",
-    3: "La solicitud de ubicación tardó demasiado. Intenta nuevamente."
-  };
-
-  locationStatus.textContent = messages[error.code] || "No se pudo obtener la ubicación.";
+function createUserIcon() {
+  return L.divIcon({
+    className: "",
+    html: `<span class="marker-dot marker-user"></span>`,
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
+    popupAnchor: [0, -12]
+  });
 }
 
-function detectUserLocation(centerMap = true) {
+function createPopup(point) {
+  return `
+    <div class="popup">
+      <h3>${escapeHtml(point.nombre)}</h3>
+      <p><strong>Departamento:</strong> ${escapeHtml(point.departamento || "")}</p>
+      <p><strong>Dirección:</strong> ${escapeHtml(point.direccion || "")}</p>
+      <p><strong>CC:</strong> ${escapeHtml(point.cc || "")}</p>
+      <p><strong>Estado:</strong> ${formatStatus(point.estado)}</p>
+      <p>${escapeHtml(point.texto || "")}</p>
+      <p><strong>Coordenadas:</strong> ${point.lat}, ${point.lng}</p>
+      <a href="${googleRouteUrl(point)}" target="_blank" rel="noopener">Abrir ruta en Google Maps</a><br>
+      <a href="${googleSearchUrl(point)}" target="_blank" rel="noopener">Buscar dirección en Google Maps</a>
+    </div>
+  `;
+}
+
+function createCard(point) {
+  const card = document.createElement("article");
+  card.className = "card";
+
+  card.innerHTML = `
+    <h3>${escapeHtml(point.nombre)}</h3>
+    <p>${escapeHtml(point.direccion || "")}</p>
+    <p><strong>CC:</strong> ${escapeHtml(point.cc || "")}</p>
+    <span class="badge ${point.estado}">${formatStatus(point.estado)}</span>
+    <span class="dept">${escapeHtml(point.departamento || "Sin departamento")}</span>
+    <p>${escapeHtml(point.lat)}, ${escapeHtml(point.lng)}</p>
+    <p>${escapeHtml(point.texto || "")}</p>
+    <div class="links">
+      <a href="#" data-action="zoom">Ver en el mapa</a>
+      <a href="${googleRouteUrl(point)}" target="_blank" rel="noopener">Ruta en Google Maps</a>
+      <a href="${googleSearchUrl(point)}" target="_blank" rel="noopener">Buscar dirección en Google Maps</a>
+    </div>
+  `;
+
+  card.querySelector('[data-action="zoom"]').addEventListener("click", (event) => {
+    event.preventDefault();
+
+    if (!isValidCoordinate(point.lat, point.lng)) {
+      showMessage("Este punto no tiene latitud/longitud válidas.");
+      return;
+    }
+
+    map.setView([point.lat, point.lng], 18);
+  });
+
+  return card;
+}
+
+function locateUser() {
   if (!navigator.geolocation) {
-    locationStatus.textContent = "Este navegador no soporta geolocalización.";
+    showMessage("Tu navegador no soporta geolocalización.");
     return;
   }
 
-  if (!window.isSecureContext) {
-    locationStatus.textContent = "La ubicación está bloqueada porque la página no está en HTTPS. Súbelo a GitHub Pages o prueba en http://localhost.";
-    return;
-  }
-
-  locationStatus.textContent = "Solicitando ubicación... acepta el permiso del navegador.";
+  showMessage("Buscando tu ubicación actual...");
 
   navigator.geolocation.getCurrentPosition(
-    position => updateUserLocation(position, centerMap),
-    handleLocationError,
-    { enableHighAccuracy: true, timeout: 12000, maximumAge: 30000 }
+    (position) => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      const accuracy = Math.round(position.coords.accuracy);
+
+      if (userMarker) {
+        map.removeLayer(userMarker);
+      }
+
+      userMarker = L.marker([lat, lng], {
+        icon: createUserIcon()
+      }).addTo(map);
+
+      userMarker.bindPopup(`
+        <strong>Mi ubicación actual</strong><br>
+        Precisión aproximada: ${accuracy} metros<br>
+        ${lat}, ${lng}
+      `).openPopup();
+
+      map.setView([lat, lng], 16);
+      showMessage(`Ubicación detectada. Precisión aproximada: ${accuracy} metros.`);
+    },
+    (error) => {
+      const messages = {
+        1: "Permiso denegado. Activa el permiso de ubicación para esta página.",
+        2: "No se pudo determinar la ubicación. Activa GPS/datos móviles e intenta otra vez.",
+        3: "La búsqueda de ubicación tardó demasiado. Intenta nuevamente."
+      };
+
+      showMessage(messages[error.code] || "No se pudo obtener tu ubicación.");
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 15000,
+      maximumAge: 0
+    }
   );
-
-  if (watchId === null) {
-    watchId = navigator.geolocation.watchPosition(
-      position => updateUserLocation(position, false),
-      handleLocationError,
-      { enableHighAccuracy: true, timeout: 12000, maximumAge: 30000 }
-    );
-  }
 }
 
-async function loadData() {
-  try {
-    const response = await fetch("data.json?cache=" + Date.now());
-    puntos = await response.json();
-    render();
-    fitToResults();
-  } catch (error) {
-    console.error(error);
-    list.innerHTML = "<p>No se pudo cargar data.json.</p>";
-  }
+function googleRouteUrl(point) {
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(point.lat + "," + point.lng)}`;
 }
 
-searchInput.addEventListener("input", render);
-statusFilter.addEventListener("change", render);
-fitBtn.addEventListener("click", fitToResults);
-locateBtn.addEventListener("click", () => detectUserLocation(true));
-
-loadData();
-
-if (!window.isSecureContext) {
-  locationStatus.textContent = "Para detectar ubicación debes usar HTTPS. En GitHub Pages funcionará; abierto como archivo local puede fallar.";
+function googleSearchUrl(point) {
+  const q = `${point.direccion || ""} ${point.departamento || ""} Perú`;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
 }
+
+function isValidCoordinate(lat, lng) {
+  return typeof lat === "number" &&
+    typeof lng === "number" &&
+    lat >= -90 &&
+    lat <= 90 &&
+    lng >= -180 &&
+    lng <= 180;
+}
+
+function normalize(value) {
+  return String(value || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+function formatStatus(status) {
+  return status === "visitada" ? "Visitada" : "Sin visitar";
+}
+
+function showMessage(text) {
+  messageEl.textContent = text;
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
