@@ -68,13 +68,24 @@
   },
   {
     "id": 7,
-    "nombre": "DISTRIBUCIONES AGROVET GRANDEZ EIRL.",
+    "nombre": "SERVICIOS VETERINARIOS SEVAVET SRL.",
     "cc": "CC-0007",
     "departamento": "Cajamarca",
-    "direccion": "AV. ATAHUALPA NRO. 584- CAJAMARCA",
+    "direccion": "JR. REVILLA PEREZ NRO. 156 - CAJAMARCA",
     "lat":-7.1657,
     "lng":-78.5053,
     "estado": "sin_visitar",
-    "texto": "Pendiente de primera visita. BAJA DE OFICIO "
+    "texto": "Pendiente de primera visita."
+  },
+  {
+    "id": 8,
+    "nombre": "DISTRIBUCIONES AGROVET GRANDEZ EIRL.",
+    "cc": "CC-0008",
+    "departamento": "Cajamarca",
+    "direccion": "AV. ATAHUALPA NRO. 584- CAJAMARCA",
+    "lat":-7.1531,
+    "lng":-78.5330,
+    "estado": "sin_visitar",
+    "texto": "Pendiente de primera visita. "
   }
 ]
