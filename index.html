@@ -3,29 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Control de visitas PRO</title>
+  <title>Control de visitas móvil</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
-    <div>
-      <h1>Control de visitas PRO</h1>
-      <p>La Libertad y Cajamarca · JSON + OpenStreetMap · sin API key</p>
-    </div>
-    <div class="legend">
-      <span><b class="dot orange"></b> Sin visitar</span>
-      <span><b class="dot green"></b> Visitada</span>
-      <span><b class="dot blue"></b> Mi ubicación</span>
-    </div>
+    <h1>Control de visitas</h1>
+    <p>La Libertad y Cajamarca · sin API key</p>
   </header>
 
   <main>
-    <aside class="panel">
-      <section class="controls">
-        <input id="searchInput" type="search" placeholder="Buscar nombre, CC, dirección o texto..." />
+    <section id="map"></section>
 
-        <div class="row">
+    <aside class="panel">
+      <button id="togglePanelBtn" class="toggle-panel">Mostrar / ocultar lista y filtros</button>
+
+      <div id="panelContent" class="panel-content">
+        <section class="controls">
+          <input id="searchInput" type="search" placeholder="Buscar nombre, CC, dirección o texto..." />
+
           <select id="departmentFilter">
             <option value="todos">Todos los departamentos</option>
             <option value="La Libertad">La Libertad</option>
@@ -37,20 +34,18 @@
             <option value="sin_visitar">Sin visitar</option>
             <option value="visitada">Visitada</option>
           </select>
-        </div>
 
-        <button id="locateBtn">Detectar mi ubicación</button>
-        <button id="nearestBtn" class="secondary">Ir al punto más cercano</button>
-        <button id="fitBtn" class="secondary">Ajustar a resultados</button>
-        <button id="resetBtn" class="ghost">Ver toda mi jurisdicción</button>
-      </section>
+          <button id="locateBtn">Detectar mi ubicación</button>
+          <button id="nearestBtn">Ir al punto más cercano</button>
+          <button id="fitBtn">Ajustar a resultados</button>
+          <button id="resetBtn">Ver jurisdicción completa</button>
+        </section>
 
-      <section id="message" class="message">Cargando datos...</section>
-      <section id="stats" class="stats"></section>
-      <section id="list" class="list"></section>
+        <section id="message" class="message">Cargando datos...</section>
+        <section id="stats" class="stats"></section>
+        <section id="list" class="list"></section>
+      </div>
     </aside>
-
-    <section id="map"></section>
   </main>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
