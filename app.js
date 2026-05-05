@@ -68,6 +68,15 @@ function googleMapsUrl(p) {
   return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(p.lat + "," + p.lng)}`;
 }
 
+function googleMapsSearchUrl(p) {
+  const query = p.direccion ? `${p.direccion}, La Libertad, Perú` : `${p.lat},${p.lng}`;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}
+
+function hasValidCoordinates(p) {
+  return Number.isFinite(Number(p.lat)) && Number.isFinite(Number(p.lng));
+}
+
 function popupContent(p) {
   return `
     <div class="popup-title">${p.nombre}</div>
@@ -75,7 +84,9 @@ function popupContent(p) {
     <div class="popup-row"><b>Dirección:</b> ${p.direccion || "-"}</div>
     <div class="popup-row"><b>Estado:</b> ${estadoTexto(p.estado)}</div>
     <div class="popup-row"><b>Texto:</b> ${p.texto || "-"}</div>
+    <div class="coords"><b>Coordenadas:</b> ${p.lat}, ${p.lng}</div>
     <a class="route-link" href="${googleMapsUrl(p)}" target="_blank" rel="noopener">Abrir ruta en Google Maps</a>
+    <a class="route-link secondary-link" href="${googleMapsSearchUrl(p)}" target="_blank" rel="noopener">Ver punto en Google Maps</a>
   `;
 }
 
@@ -132,6 +143,7 @@ function renderList(data) {
       <small>${p.direccion || "Sin dirección"}</small>
       <div>CC: ${p.cc || "-"}</div>
       <span class="badge ${p.estado}">${estadoTexto(p.estado)}</span>
+      <div class="coords">${p.lat}, ${p.lng}</div>
       <a class="mini-route" href="${googleMapsUrl(p)}" target="_blank" rel="noopener">Ruta en Google Maps</a>
     `;
 
@@ -153,9 +165,9 @@ function renderMarkers(data) {
   visibleMarkers = [];
 
   data.forEach(p => {
-    if (typeof p.lat !== "number" || typeof p.lng !== "number") return;
+    if (!hasValidCoordinates(p)) return;
 
-    const marker = L.marker([p.lat, p.lng], {
+    const marker = L.marker([Number(p.lat), Number(p.lng)], {
       icon: markerIcon(p.estado)
     }).bindPopup(popupContent(p));
 
@@ -212,9 +224,9 @@ function updateUserLocation(position, centerMap = false) {
 
 function handleLocationError(error) {
   const messages = {
-    1: "Permiso de ubicación denegado. Actívalo en tu navegador.",
-    2: "No se pudo determinar tu ubicación.",
-    3: "La solicitud de ubicación tardó demasiado."
+    1: "Permiso de ubicación denegado. Actívalo en tu navegador. En Chrome: candado junto a la URL > Permisos > Ubicación > Permitir.",
+    2: "No se pudo determinar tu ubicación. Activa GPS/ubicación del equipo y prueba al aire libre o con datos móviles.",
+    3: "La solicitud de ubicación tardó demasiado. Intenta nuevamente."
   };
 
   locationStatus.textContent = messages[error.code] || "No se pudo obtener la ubicación.";
@@ -226,7 +238,12 @@ function detectUserLocation(centerMap = true) {
     return;
   }
 
-  locationStatus.textContent = "Solicitando ubicación...";
+  if (!window.isSecureContext) {
+    locationStatus.textContent = "La ubicación está bloqueada porque la página no está en HTTPS. Súbelo a GitHub Pages o prueba en http://localhost.";
+    return;
+  }
+
+  locationStatus.textContent = "Solicitando ubicación... acepta el permiso del navegador.";
 
   navigator.geolocation.getCurrentPosition(
     position => updateUserLocation(position, centerMap),
@@ -261,3 +278,7 @@ fitBtn.addEventListener("click", fitToResults);
 locateBtn.addEventListener("click", () => detectUserLocation(true));
 
 loadData();
+
+if (!window.isSecureContext) {
+  locationStatus.textContent = "Para detectar ubicación debes usar HTTPS. En GitHub Pages funcionará; abierto como archivo local puede fallar.";
+}
