@@ -76,7 +76,7 @@ async function loadData() {
 function render() {
   markersLayer.clearLayers();
   markerById.clear();
-  els.list.innerHTML = "";
+  if (els.list) els.list.innerHTML = "";
 
   const q = normalize(els.search.value);
   const dept = els.department.value;
@@ -99,7 +99,7 @@ function render() {
 
   currentFiltered.forEach(point => {
     if (validCoords(point)) {
-      const marker = L.marker([point.lat, point.lng], {
+      const marker = L.marker([Number(point.lat), Number(point.lng)], {
         icon: createIcon(point.estado)
       }).addTo(markersLayer);
 
@@ -107,7 +107,7 @@ function render() {
       markerById.set(String(point.id), marker);
     }
 
-    els.list.appendChild(cardEl(point));
+    if (els.list) els.list.appendChild(cardEl(point));
   });
 
   updateStats();
@@ -169,7 +169,7 @@ function cardEl(point) {
   card.className = "card";
 
   const distance = userLocation && validCoords(point)
-    ? `<p><strong>Distancia aprox:</strong> ${formatDistance(distanceKm(userLocation.lat, userLocation.lng, point.lat, point.lng))}</p>`
+    ? `<p><strong>Distancia aprox:</strong> ${formatDistance(distanceKm(userLocation.lat, userLocation.lng, Number(point.lat), Number(point.lng)))}</p>`
     : "";
 
   card.innerHTML = `
@@ -202,7 +202,7 @@ function cardEl(point) {
       els.panelContent.classList.add("collapsed");
     }
 
-    map.setView([point.lat, point.lng], 18);
+    map.setView([Number(point.lat), Number(point.lng)], 18);
     setTimeout(() => map.invalidateSize(), 150);
 
     const marker = markerById.get(String(point.id));
@@ -275,10 +275,10 @@ function goToNearestPoint() {
   }
 
   let nearest = valid[0];
-  let min = distanceKm(userLocation.lat, userLocation.lng, nearest.lat, nearest.lng);
+  let min = distanceKm(userLocation.lat, userLocation.lng, Number(nearest.lat), Number(nearest.lng));
 
   valid.forEach(point => {
-    const d = distanceKm(userLocation.lat, userLocation.lng, point.lat, point.lng);
+    const d = distanceKm(userLocation.lat, userLocation.lng, Number(point.lat), Number(point.lng));
     if (d < min) {
       min = d;
       nearest = point;
@@ -289,7 +289,7 @@ function goToNearestPoint() {
     els.panelContent.classList.add("collapsed");
   }
 
-  map.setView([nearest.lat, nearest.lng], 18);
+  map.setView([Number(nearest.lat), Number(nearest.lng)], 18);
   setTimeout(() => map.invalidateSize(), 150);
 
   const marker = markerById.get(String(nearest.id));
@@ -305,7 +305,7 @@ function fitToResults() {
     return;
   }
 
-  const bounds = L.latLngBounds(valid.map(p => [p.lat, p.lng]));
+  const bounds = L.latLngBounds(valid.map(p => [Number(p.lat), Number(p.lng)]));
   map.fitBounds(bounds, { padding: [35, 35] });
   setTimeout(() => map.invalidateSize(), 100);
 }
@@ -317,7 +317,12 @@ function togglePanel() {
 }
 
 function routeUrl(point) {
-  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(point.lat + "," + point.lng)}`;
+  if (validCoords(point)) {
+    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(Number(point.lat) + "," + Number(point.lng))}`;
+  }
+
+  const q = `${point.direccion || ""} ${point.departamento || ""} Perú`;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
 }
 
 function searchUrl(point) {
@@ -346,12 +351,15 @@ function formatDistance(km) {
 }
 
 function validCoords(point) {
-  return typeof point.lat === "number" &&
-    typeof point.lng === "number" &&
-    point.lat >= -90 &&
-    point.lat <= 90 &&
-    point.lng >= -180 &&
-    point.lng <= 180;
+  const lat = Number(point.lat);
+  const lng = Number(point.lng);
+
+  return Number.isFinite(lat) &&
+    Number.isFinite(lng) &&
+    lat >= -90 &&
+    lat <= 90 &&
+    lng >= -180 &&
+    lng <= 180;
 }
 
 function normalize(value) {
