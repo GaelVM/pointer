@@ -3,39 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Control de visitas - La Libertad y Cajamarca</title>
+  <title>Control de visitas PRO</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
-    <h1>Control de visitas - La Libertad y Cajamarca</h1>
-    <p>Mapa público con puntos desde JSON, sin API key.</p>
+    <div>
+      <h1>Control de visitas PRO</h1>
+      <p>La Libertad y Cajamarca · JSON + OpenStreetMap · sin API key</p>
+    </div>
+    <div class="legend">
+      <span><b class="dot orange"></b> Sin visitar</span>
+      <span><b class="dot green"></b> Visitada</span>
+      <span><b class="dot blue"></b> Mi ubicación</span>
+    </div>
   </header>
 
   <main>
     <aside class="panel">
-      <div class="controls">
-        <input id="searchInput" type="search" placeholder="Buscar por nombre, CC, dirección o texto..." />
+      <section class="controls">
+        <input id="searchInput" type="search" placeholder="Buscar nombre, CC, dirección o texto..." />
 
-        <select id="departmentFilter">
-          <option value="todos">Todos los departamentos</option>
-          <option value="La Libertad">La Libertad</option>
-          <option value="Cajamarca">Cajamarca</option>
-        </select>
+        <div class="row">
+          <select id="departmentFilter">
+            <option value="todos">Todos los departamentos</option>
+            <option value="La Libertad">La Libertad</option>
+            <option value="Cajamarca">Cajamarca</option>
+          </select>
 
-        <select id="statusFilter">
-          <option value="todos">Todos los estados</option>
-          <option value="sin_visitar">Sin visitar</option>
-          <option value="visitada">Visitada</option>
-        </select>
+          <select id="statusFilter">
+            <option value="todos">Todos los estados</option>
+            <option value="sin_visitar">Sin visitar</option>
+            <option value="visitada">Visitada</option>
+          </select>
+        </div>
 
         <button id="locateBtn">Detectar mi ubicación</button>
-        <button id="resetBtn">Ver toda mi jurisdicción</button>
-      </div>
+        <button id="nearestBtn" class="secondary">Ir al punto más cercano</button>
+        <button id="fitBtn" class="secondary">Ajustar a resultados</button>
+        <button id="resetBtn" class="ghost">Ver toda mi jurisdicción</button>
+      </section>
 
-      <div id="message" class="message"></div>
-      <div id="list" class="list"></div>
+      <section id="message" class="message">Cargando datos...</section>
+      <section id="stats" class="stats"></section>
+      <section id="list" class="list"></section>
     </aside>
 
     <section id="map"></section>
@@ -45,5 +57,3 @@
   <script src="app.js"></script>
 </body>
 </html>
-
-
