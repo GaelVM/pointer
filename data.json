@@ -22,6 +22,28 @@
     "texto": "Pendiente de visita"
   },
   {
+    "id": 1,
+    "nombre": "AGROSOLTEC S.R.LTDA",
+    "cc": "CC-0001",
+    "departamento": "Cajamarca",
+    "direccion": "JR. REVILLA PEREZ NRO. 153 - CAJAMARCA",
+    "estado": "sin_visitar",
+    "lat": -7.153026,
+    "lng": -78.5173973,
+    "texto": "Pendiente de visita"
+  },
+  {
+    "id": 2,
+    "nombre": "AGROVETERINARIA LA SOLUCION E.I.R.L.",
+    "cc": "CC-0002",
+    "departamento": "Cajamarca",
+    "direccion": "JR. STA TERESA DE JOURNET NRO. 428 - CAJAMARCA",
+    "estado": "sin_visitar",
+    "lat": -7.1470511,
+    "lng": -78.5113709,
+    "texto": "Pendiente de visita"
+  },
+  {
     "id": 3,
     "nombre": "AGROVETERINARIA LA SOLUCION E.I.R.L.",
     "cc": "CC-0003",
