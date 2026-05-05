@@ -42,5 +42,16 @@
     "lng":-78.5183842,
     "estado": "sin_visitar",
     "texto": "Pendiente de primera visita. BAJA DE OFICIO "
+  },
+    {
+    "id": 5,
+    "nombre": "J. R. Y W GANADEROS S. R. LDA.",
+    "cc": "CC-0005",
+    "departamento": "Cajamarca",
+    "direccion": "PJ. LAS CUCARDAS NRO. 269 - CAJAMARCA",
+    "lat":-7.1480548,
+    "lng":-78.5252229,
+    "estado": "sin_visitar",
+    "texto": "Pendiente de primera visita. BAJA DE OFICIO "
   }
 ]
