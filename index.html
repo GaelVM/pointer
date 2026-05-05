@@ -1,60 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Control de visitas - La Libertad</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control de visitas - La Libertad y Cajamarca</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <div>
-      <h1>Control de visitas - La Libertad</h1>
-      <p>Mapa público con puntos desde JSON, sin API key.</p>
-    </div>
-    <div class="stats">
-      <span id="totalCount">0 puntos</span>
-      <span id="visitedCount">0 visitadas</span>
-      <span id="pendingCount">0 sin visitar</span>
-    </div>
+  <header>
+    <h1>Control de visitas - La Libertad y Cajamarca</h1>
+    <p>Mapa público con puntos desde JSON, sin API key.</p>
   </header>
 
-  <main class="layout">
+  <main>
     <aside class="panel">
-      <h2>Buscar y filtrar</h2>
+      <div class="controls">
+        <input id="searchInput" type="search" placeholder="Buscar por nombre, CC, dirección o texto..." />
 
-      <label for="searchInput">Buscar por nombre, CC, dirección o texto</label>
-      <input id="searchInput" type="search" placeholder="Ej: Trujillo, 123456, cliente..." />
+        <select id="departmentFilter">
+          <option value="todos">Todos los departamentos</option>
+          <option value="La Libertad">La Libertad</option>
+          <option value="Cajamarca">Cajamarca</option>
+        </select>
 
-      <label for="statusFilter">Estado</label>
-      <select id="statusFilter">
-        <option value="todos">Todos</option>
-        <option value="sin_visitar">Sin visitar</option>
-        <option value="visitada">Visitada</option>
-      </select>
+        <select id="statusFilter">
+          <option value="todos">Todos los estados</option>
+          <option value="sin_visitar">Sin visitar</option>
+          <option value="visitada">Visitada</option>
+        </select>
 
-      <button id="fitBtn" type="button">Ajustar mapa a resultados</button>
-      <button id="locateBtn" type="button" class="secondary">Detectar mi ubicación</button>
-      <p id="locationStatus" class="hint">Tu ubicación aparecerá en azul si autorizas el permiso del navegador.</p>
-      <p class="warning"><b>Nota:</b> La CC solo sirve para buscar/identificar. La precisión del mapa depende de <b>lat</b> y <b>lng</b> en el JSON.</p>
-
-      <div class="legend">
-        <h3>Leyenda</h3>
-        <div><span class="dot pending"></span> Sin visitar</div>
-        <div><span class="dot visited"></span> Visitada</div>
-        <div><span class="dot current"></span> Mi ubicación</div>
+        <button id="locateBtn">Detectar mi ubicación</button>
+        <button id="resetBtn">Ver toda mi jurisdicción</button>
       </div>
 
-      <h3>Resultados</h3>
+      <div id="message" class="message"></div>
       <div id="list" class="list"></div>
     </aside>
 
-    <section id="map" class="map" aria-label="Mapa de puntos en La Libertad"></section>
+    <section id="map"></section>
   </main>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
+
 
