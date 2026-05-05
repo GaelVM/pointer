@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Control de visitas - La Libertad</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Control de visitas - La Libertad</h1>
+      <p>Mapa público con puntos desde JSON, sin API key.</p>
+    </div>
+    <div class="stats">
+      <span id="totalCount">0 puntos</span>
+      <span id="visitedCount">0 visitadas</span>
+      <span id="pendingCount">0 sin visitar</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="panel">
+      <h2>Buscar y filtrar</h2>
+
+      <label for="searchInput">Buscar por nombre, CC, dirección o texto</label>
+      <input id="searchInput" type="search" placeholder="Ej: Trujillo, 123456, cliente..." />
+
+      <label for="statusFilter">Estado</label>
+      <select id="statusFilter">
+        <option value="todos">Todos</option>
+        <option value="sin_visitar">Sin visitar</option>
+        <option value="visitada">Visitada</option>
+      </select>
+
+      <button id="fitBtn" type="button">Ajustar mapa a resultados</button>
+      <button id="locateBtn" type="button" class="secondary">Detectar mi ubicación</button>
+      <p id="locationStatus" class="hint">Tu ubicación aparecerá en azul si autorizas el permiso del navegador.</p>
+
+      <div class="legend">
+        <h3>Leyenda</h3>
+        <div><span class="dot pending"></span> Sin visitar</div>
+        <div><span class="dot visited"></span> Visitada</div>
+        <div><span class="dot current"></span> Mi ubicación</div>
+      </div>
+
+      <h3>Resultados</h3>
+      <div id="list" class="list"></div>
+    </aside>
+
+    <section id="map" class="map" aria-label="Mapa de puntos en La Libertad"></section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
