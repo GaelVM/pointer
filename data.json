@@ -757,17 +757,7 @@
     "lng": -78.999251,
     "texto": "Pendiente de visita"
   },
-  {
-    "id": 146,
-    "nombre": "BERRU GARCIA, CELINDA",
-    "cc": " 10445166087",
-    "departamento": "Cajamarca",
-    "direccion": "HUARANGO - SAN IGNACIO - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
+  
   {
     "id": 147,
     "nombre": "FERNANDEZ BARBOZA, BREMILDA",
@@ -1065,17 +1055,7 @@
     "lng": -78.999483,
     "texto": "Pendiente de visita"
   },
-  {
-    "id": 174,
-    "nombre": "MULTISERVICIOS \"VALLE DEL CHINCHIPE\"",
-    "cc": " 10430273481",
-    "departamento": "Cajamarca",
-    "direccion": "SAN IGNACIO - SAN IGNACIO - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
+ 
   {
     "id": 175,
     "nombre": "NEGOCIOS \"AGRONUEVO\"",
@@ -1263,17 +1243,7 @@
     "lng": -78.818948,
     "texto": "Pendiente de visita"
   },
-  {
-    "id": 192,
-    "nombre": "CORONEL TANTALEAN, DOMINGO",
-    "cc": " 10272437128",
-    "departamento": "Cajamarca",
-    "direccion": "CUTERVO - CUTERVO - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
+ 
   {
     "id": 193,
     "nombre": "OLIVERA CERCADO, RONAL",
