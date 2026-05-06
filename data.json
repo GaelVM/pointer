@@ -470,17 +470,7 @@
     "lng": -78.50329,
     "texto": "Pendiente de visita"
   },
-  {
-    "id": 119,
-    "nombre": "ANGULO LEON, ALAN WILLY",
-    "cc": " 10431279318",
-    "departamento": "Cajamarca",
-    "direccion": "CAJAMARCA - CAJAMARCA - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
+ 
   {
     "id": 120,
     "nombre": "FLORES FLORES, ARMANDINA",
@@ -1405,39 +1395,7 @@
     "lng": -78.803826,
     "texto": "Pendiente de visita"
   },
-  {
-    "id": 204,
-    "nombre": "AGROQUIMICOS Y FERTILIZANTES JAEN E.I.R.L.",
-    "cc": " 20570750403",
-    "departamento": "Cajamarca",
-    "direccion": "JAEN - JAEN - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
-  {
-    "id": 205,
-    "nombre": "CENTRO VETERINARIO Y AGRICOLA LA COLMENA S.R.L",
-    "cc": " 20600440781",
-    "departamento": "Cajamarca",
-    "direccion": "PEDRO GALVEZ - SAN MARCOS - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
-  {
-    "id": 206,
-    "nombre": "HERRERA VARGAS, FLOR DE MARIA",
-    "cc": " 10451435278",
-    "departamento": "Cajamarca",
-    "direccion": "PEDRO GALVEZ - SAN MARCOS - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
+
   {
     "id": 207,
     "nombre": "CONSTRUCCIONES DISVELDO E.I.R.L.",
@@ -1445,30 +1403,19 @@
     "departamento": "Cajamarca",
     "direccion": "CAJAMARCA - CAJAMARCA - CAJAMARCA",
     "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
+    "lat": -7.1493383,
+    "lng": -78.5208827,
     "texto": "Pendiente de visita"
   },
-  {
+    {
     "id": 208,
-    "nombre": "VASQUEZ CHUQUILIN, DENIS MARINO",
-    "cc": " 10421391586",
+    "nombre": "CONSTRUCCIONES DISVELDO E.I.R.L.",
+    "cc": " 20440403281",
     "departamento": "Cajamarca",
     "direccion": "CAJAMARCA - CAJAMARCA - CAJAMARCA",
     "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
-  {
-    "id": 209,
-    "nombre": "ARMAS FLORES JOSE MARCOS",
-    "cc": " 10279171018",
-    "departamento": "Cajamarca",
-    "direccion": "PEDRO GALVEZ - SAN MARCOS - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
+    "lat": -7.1604218,
+    "lng": -78.5174832,
     "texto": "Pendiente de visita"
   },
   {
@@ -1504,28 +1451,7 @@
     "lng": -78.514945,
     "texto": "Pendiente de visita"
   },
-  {
-    "id": 213,
-    "nombre": "SALVADOR CASTILLO, LIBRANDO",
-    "cc": " 10444289339",
-    "departamento": "Cajamarca",
-    "direccion": "SAN IGNACIO - SAN IGNACIO - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
-  {
-    "id": 214,
-    "nombre": "AGROSERVICIOS TORRES S.R.L.",
-    "cc": " 20479594628",
-    "departamento": "Cajamarca",
-    "direccion": "JAEN - JAEN - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
+ 
   {
     "id": 215,
     "nombre": "AZULA PEREZ, VILMA",
@@ -1537,17 +1463,7 @@
     "lng": -78.514915,
     "texto": "Pendiente de visita"
   },
-  {
-    "id": 216,
-    "nombre": "AGRONEGOCIOS \"LIDER\" S.A.C.",
-    "cc": " 20570828445",
-    "departamento": "Cajamarca",
-    "direccion": "PUCARA - JAEN - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
+ 
   {
     "id": 217,
     "nombre": "CORPORACION AGRICOLA \"EL AMIGO\"  E.I.R.L.",
@@ -1581,17 +1497,7 @@
     "lng": -78.795052,
     "texto": "Pendiente de visita"
   },
-  {
-    "id": 220,
-    "nombre": "FERTIMAX S.A.",
-    "cc": " 20248312849",
-    "departamento": "Cajamarca",
-    "direccion": "JAEN - JAEN - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
+
   {
     "id": 221,
     "nombre": "GONZALEZ ARIAS, ROBERT",
@@ -1610,8 +1516,8 @@
     "departamento": "Cajamarca",
     "direccion": "CHILETE - CONTUMAZA - CAJAMARCA",
     "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
+    "lat": -7.2244953,
+    "lng": -78.838787,
     "texto": "Pendiente de visita"
   },
   {
@@ -1621,8 +1527,8 @@
     "departamento": "Cajamarca",
     "direccion": "CAJAMARCA - CAJAMARCA - CAJAMARCA",
     "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
+    "lat": -7.1637551,
+    "lng":-78.5103286,
     "texto": "Pendiente de visita"
   },
   {
@@ -1636,50 +1542,7 @@
     "lng": -78.514819,
     "texto": "Pendiente de visita"
   },
-  {
-    "id": 225,
-    "nombre": "HUNBRI SERVICIOS GENERALES S.R.L",
-    "cc": " 20570890167",
-    "departamento": "Cajamarca",
-    "direccion": "NAMORA - CAJAMARCA - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
-  {
-    "id": 226,
-    "nombre": "CHÁVEZ ALVA PEDRO RICHAR",
-    "cc": " 10460724347",
-    "departamento": "Cajamarca",
-    "direccion": "CAJAMARCA - CAJAMARCA - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
-  {
-    "id": 227,
-    "nombre": "CHÁVEZ ALVA PEDRO RICHAR",
-    "cc": " 10460724347",
-    "departamento": "Cajamarca",
-    "direccion": "CAJAMARCA - CAJAMARCA - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
-  {
-    "id": 228,
-    "nombre": "CHÁVEZ ALVA PEDRO RICHAR",
-    "cc": " 10460724347",
-    "departamento": "Cajamarca",
-    "direccion": "CAJAMARCA - CAJAMARCA - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
+  
   {
     "id": 229,
     "nombre": "TORRES FRIAS ELEUTERIO",
@@ -1757,17 +1620,7 @@
     "lng": -79.005859,
     "texto": "Pendiente de visita"
   },
-  {
-    "id": 236,
-    "nombre": "ALCANTARA NARRO INEMESIO",
-    "cc": " 10266401626",
-    "departamento": "Cajamarca",
-    "direccion": "ASUNCION - CAJAMARCA - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
+ 
   {
     "id": 237,
     "nombre": "CORPORACION AGRICOLA EL BUEN SEMBRADOR EIRL",
@@ -2648,17 +2501,7 @@
     "lng": -78.043306,
     "texto": "Pendiente de visita"
   },
-  {
-    "id": 317,
-    "nombre": "CAMPOS LEON MONTALVAN DIAZ S.A.C",
-    "cc": " 20604449686",
-    "departamento": "Cajamarca",
-    "direccion": "JAEN - JAEN - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
+ 
   {
     "id": 318,
     "nombre": "INVERSIONES WILLKA PACHA S.R.L.",
@@ -2703,17 +2546,7 @@
     "lng": -78.806763,
     "texto": "Pendiente de visita"
   },
-  {
-    "id": 322,
-    "nombre": "AGROSERVICIOS LA HACIENDA S.A.C.",
-    "cc": " 20602044735",
-    "departamento": "Cajamarca",
-    "direccion": "JAEN - JAEN - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
+  
   {
     "id": 323,
     "nombre": "HUARIPATA BRAVO MODESTO",
@@ -2736,17 +2569,7 @@
     "lng": -78.901468,
     "texto": "Pendiente de visita"
   },
-  {
-    "id": 325,
-    "nombre": "AGRONEGOCIOS AGRISUR E.I.R.L.",
-    "cc": " 20607648361",
-    "departamento": "Cajamarca",
-    "direccion": "JAEN - JAEN - CAJAMARCA",
-    "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
-    "texto": "Pendiente de visita"
-  },
+ 
   {
     "id": 326,
     "nombre": "DELGADO FERNANDEZ YUVIS MARILU",
@@ -3304,8 +3127,8 @@
     "departamento": "Cajamarca",
     "direccion": "CAJABAMBA - CAJABAMBA - CAJAMARCA",
     "estado": "sin_visitar",
-    "lat": null,
-    "lng": null,
+    "lat": -7.6218466,
+    "lng": -78.0452618,
     "texto": "Pendiente de visita"
   },
   {
